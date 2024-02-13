@@ -38,7 +38,7 @@ class _ShoppingCartState extends State<ShoppingCart> {
         itemBuilder: (context, index) {
           var product = cartProvider.cartItems[index];
           return ListTile(
-            leading: Image.network(product.imageUrl), // Corrected here
+            leading: Image.network(product.imageUrl ??''), // Corrected here
             title: Text(product.name),
             subtitle: Text('\$${product.price}'),
             trailing: ElevatedButton(

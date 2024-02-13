@@ -4,7 +4,7 @@ import 'package:super_store/screen_view/products.dart';
 
 import 'cart.dart';
 import 'cart_icon_manage.dart';
-import 'cart_item_manage.dart';
+
 
 import '../navigator/route_name.dart';
 
@@ -35,6 +35,7 @@ class _ProductCartState extends State<ProductCart> {
     return Container(
         width: 150,
         height: 340,
+        constraints: const BoxConstraints(maxHeight: 340),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(11),
           border: Border.all(color: Colors.blue, width: 1),
@@ -109,16 +110,8 @@ class _ProductCartState extends State<ProductCart> {
                   ));
 
                   // Optionally, you can navigate to the shopping cart screen
-                  Navigator.pushNamed(
-                    context,
-                    RouteName.shoppingCart,
-                    arguments: {
-                      'productName': 'Your Product Name',
-                      'price': 'Your Product Price',
-                      'imageUrl': 'Your Product Image URL',
-                    },
-                  );
-                  ;
+
+
                 },
                 child: const Text(
                   'Add to cart',

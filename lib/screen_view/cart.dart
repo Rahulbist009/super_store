@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:super_store/screen_view/products.dart';
 
 class CartProvider extends ChangeNotifier {
@@ -7,8 +9,13 @@ class CartProvider extends ChangeNotifier {
   List<Product> get cartItems => _cartItems;
 
   void addToCart(Product product) {
-    _cartItems.add(product);
-    notifyListeners();
+    // Check if the product is already in the cart
+    if (_cartItems.contains(product)) {
+      showToast('Product already in the cart.');
+    } else {
+      _cartItems.add(product);
+      notifyListeners();
+    }
   }
 
   void removeItem(Product product) {
@@ -16,3 +23,15 @@ class CartProvider extends ChangeNotifier {
     notifyListeners();
   }
 }
+void showToast(String message) {
+  Fluttertoast.showToast(
+    msg: message,
+    toastLength: Toast.LENGTH_SHORT,
+    gravity: ToastGravity.BOTTOM,
+    timeInSecForIosWeb: 1,
+    backgroundColor: Colors.grey,
+    textColor: Colors.white,
+    fontSize: 16.0,
+  );
+}
+

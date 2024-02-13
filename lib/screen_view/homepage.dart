@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 
 import 'package:badges/badges.dart' as badges;
+import 'package:provider/provider.dart';
 import 'package:super_store/screen_view/product_cart.dart';
 import 'package:super_store/screen_view/product_search.dart';
 
 import '../navigator/route_name.dart';
+import 'cart.dart';
 import 'cart_icon_manage.dart';
 
 class HomePage extends StatefulWidget {
@@ -288,13 +290,25 @@ class CartBadge extends StatefulWidget {
 }
 
 class _CartBadgeState extends State<CartBadge> {
+  late Cart _cart;
+
+  @override
+  void initState() {
+    super.initState();
+    _cart = widget.cart;
+  }
+
   @override
   Widget build(BuildContext context) {
     return badges.Badge(
       position: badges.BadgePosition.topEnd(top: -2, end: -2),
-      badgeContent: Text(
-        widget.cart.itemCount.toString(),
-        style: const TextStyle(color: Colors.white),
+      badgeContent: Consumer<CartProvider>(
+        builder: (context, cartProvider, child) {
+          return Text(
+            cartProvider.cartItems.length.toString(),
+            style: const TextStyle(color: Colors.white),
+          );
+        },
       ),
       child: IconButton(
         onPressed: () {
@@ -303,22 +317,12 @@ class _CartBadgeState extends State<CartBadge> {
             context,
             RouteName.shoppingCart,
             arguments: {
-              'cart': widget.cart, // Pass the cart instance
+              'cart': _cart, // Pass the cart instance
             },
           );
         },
         icon: const Icon(Icons.shopping_cart),
       ),
     );
-  }
-
-  @override
-  void didUpdateWidget(CartBadge oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (oldWidget.cart.itemCount != widget.cart.itemCount) {
-      // Rebuild the badge when the cart item count changes
-      print('Badge updated. New count: ${widget.cart.itemCount}');
-      setState(() {});
-    }
   }
 }
