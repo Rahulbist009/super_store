@@ -19,8 +19,9 @@ class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.lime.shade200,
       appBar: AppBar(
-        backgroundColor: Colors.teal,
+        backgroundColor: Colors.teal.shade200,
         title: const Center(
           child: Text(
             "Sign UP",
@@ -34,6 +35,8 @@ class _SignupScreenState extends State<SignupScreen> {
             child: Padding(
               padding: const EdgeInsets.all(20.0),
               child: Card(
+                color: Colors.lime.shade200,
+                shadowColor: Colors.cyan,
                 elevation: 11,
                 borderOnForeground: true,
                 child: Padding(

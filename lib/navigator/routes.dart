@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:super_store/navigator/route_name.dart';
 
-
 import '../registration/login_screen.dart';
 import '../registration/signup_screen.dart';
 import '../registration/splash_screen.dart';
@@ -12,9 +11,8 @@ import '../screen_view/product_details.dart';
 import '../screen_view/shopping_cart.dart';
 
 class Routes {
-
-  // Example:
-  static Cart cart = Cart(); // Make sure to initialize your Cart instance
+  // Example: Initialize your Cart instance
+  static Cart cart = Cart();
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -37,7 +35,7 @@ class Routes {
         return MaterialPageRoute(builder: (_) => const HomePage());
 
       case RouteName.shoppingCart:
-        return _buildShoppingCartRoute(settings, cart);
+        return _buildShoppingCartRoute(settings);
 
       default:
         return MaterialPageRoute(builder: (_) {
@@ -64,7 +62,7 @@ class Routes {
             price: price,
             imageUrl: imageUrl,
             size: size,
-            data: {},
+            data: const {},
           ),
     );
   }
@@ -90,23 +88,32 @@ class Routes {
     );
   }
 
-  static MaterialPageRoute _buildShoppingCartRoute(RouteSettings settings,
-      Cart cart) {
-    final Map<String, dynamic> arguments = settings.arguments as Map<
+  static MaterialPageRoute _buildShoppingCartRoute(RouteSettings settings) {
+    final Map<String, dynamic>? arguments = settings.arguments as Map<
         String,
-        dynamic>;
-    final String productName = arguments['productName'] ?? '';
-    final String price = arguments['price'] ?? '';
-    final String imageUrl = arguments['imageUrl'] ?? '';
+        dynamic>?;
 
-    return MaterialPageRoute(
-      builder: (_) =>
-          ShoppingCart(
-            productName: productName,
-            price: price,
-            imageUrl: imageUrl,
-            cart: cart,
-          ),
-    );
+    if (arguments != null) {
+      final String productName = arguments['productName'] ?? '';
+      final String price = arguments['price'] ?? '';
+      final String imageUrl = arguments['imageUrl'] ?? '';
+
+      return MaterialPageRoute(
+        builder: (_) =>
+            ShoppingCart(
+              productName: productName,
+              price: price,
+              imageUrl: imageUrl,
+              cart: cart,
+            ),
+      );
+    } else {
+      // Handle the case where arguments are null or not in the expected format
+      return MaterialPageRoute(builder: (_) {
+        return const Scaffold(
+          body: Center(child: Text('Invalid arguments for shopping cart')),
+        );
+      });
+    }
   }
-}
+  }

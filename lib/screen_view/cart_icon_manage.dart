@@ -1,13 +1,9 @@
 class Cart {
-  int itemCount = 0;
+  List<String> items = [];
 
   void addItem(String productName) {
-    itemCount++;
+    items.add(productName);
   }
 
-  void removeItem() {
-    if (itemCount > 0) {
-      itemCount--;
-    }
-  }
+  int get itemCount => items.length;
 }

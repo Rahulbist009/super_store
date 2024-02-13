@@ -13,7 +13,8 @@ class AddressDetails extends StatefulWidget {
     required this.productName,
     required this.price,
     required this.imageUrl,
-    required this.size, required data,
+    required this.size,
+    required data,
   }) : super(key: key);
 
   @override
@@ -47,8 +48,9 @@ class _AddressDetailsState extends State<AddressDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.lime.shade200,
       appBar: AppBar(
-        backgroundColor: Colors.teal,
+        backgroundColor: Colors.teal.shade200,
         title: const Text('Product Details'),
       ),
       body: SingleChildScrollView(
@@ -172,13 +174,18 @@ class _AddressDetailsState extends State<AddressDetails> {
                   }
                 },
                 style: ElevatedButton.styleFrom(
-                  foregroundColor: Colors.orange,
-                  padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
+                  backgroundColor: Colors.orange,
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 15, horizontal: 30),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(11),
                   ),
                 ),
-                child:  const Text('Confirm Order'),
+                child: const Text(
+                  'Confirm Order',
+                  style: TextStyle(
+                      color: Colors.white, fontWeight: FontWeight.bold),
+                ),
               ),
             ),
           ],

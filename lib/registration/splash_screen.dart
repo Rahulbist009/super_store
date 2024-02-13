@@ -23,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
     // Implement your logic to check if the user is already logged in
     // For example, you might use SharedPreferences, Firebase Auth, or any other method
     // Here, I'm using a simple boolean variable for demonstration purposes
-    isLoggedIn = /* Your login status check logic */ true;
+    isLoggedIn = /* Your login status check logic */ false;
 
     // Wait for a few seconds and then navigate based on login status
     Timer(const Duration(seconds: 2), () {
@@ -38,7 +38,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.lime.shade200,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
